@@ -12,10 +12,10 @@ ${NAME}: ${OBJS}
 
 
 clean:
-	rm -f *.o *.d
+	-@rm -f ${OBJS} ${DEPS}
 
 fclean: clean
-	rm -f ${NAME}
+	-@rm -f ${NAME}
 
 ctags:
 	ctags -R *
