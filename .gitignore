@@ -1,2 +1,12 @@
 tags
 .*
+config.log
+config.status
+iputils_common.d
+iputils_common.o
+makefile.conf
+ping
+ping.d
+ping.o
+autom4te.cache/
+autom4te.cache/*
