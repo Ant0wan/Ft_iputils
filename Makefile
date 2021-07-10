@@ -1,9 +1,7 @@
 NAME		:= ping
-CC		:= cc
-CFLAGS		:= -g
-OUTPUT_OPTION	= -MMD -MP -o $@
 
-SOURCE		:= ping.c iputils_common.c
+include makefile.conf
+
 OBJS		= $(SOURCE:.c=.o)
 DEPS		= $(SOURCE:.c=.d)
 
@@ -21,3 +19,8 @@ fclean: clean
 
 ctags:
 	ctags -R *
+
+help:
+	-@echo "clean:  delete .o and .d files"
+	-@echo "fclean: execute make clean and delete binaries"
+	-@echo "ctags:  generates vim tags"
