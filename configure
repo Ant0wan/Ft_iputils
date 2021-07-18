@@ -3205,6 +3205,30 @@ fi
 done
 
 
+for ac_header in locale.h
+do :
+  ac_fn_c_check_header_mongrel "$LINENO" "locale.h" "ac_cv_header_locale_h" "$ac_includes_default"
+if test "x$ac_cv_header_locale_h" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_LOCALE_H 1
+_ACEOF
+
+fi
+
+done
+
+for ac_header in stdlib.h
+do :
+  ac_fn_c_check_header_mongrel "$LINENO" "stdlib.h" "ac_cv_header_stdlib_h" "$ac_includes_default"
+if test "x$ac_cv_header_stdlib_h" = xyes; then :
+  cat >>confdefs.h <<_ACEOF
+#define HAVE_STDLIB_H 1
+_ACEOF
+
+fi
+
+done
+
 for ac_header in stdio.h
 do :
   ac_fn_c_check_header_mongrel "$LINENO" "stdio.h" "ac_cv_header_stdio_h" "$ac_includes_default"
