@@ -14,3 +14,5 @@ Verify:
 - Packet loss %
 
 Source: [https://learning.oreilly.com/videos/tcp-ip-fundamentals/9780135450161/9780135450161-TCPI_04_08_01/](https://learning.oreilly.com/videos/tcp-ip-fundamentals/9780135450161/9780135450161-TCPI_04_08_01/)
+
+[inetutils-2.0.tar.xz](https://ftpmirror.gnu.org/inetutils/inetutils-2.0.tar.xz)
