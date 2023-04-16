@@ -1,3 +1,6 @@
 #include <stdio.h>
 
-void print(void) { fprintf(stderr, "Error! Ha !"); }
+void print(void)
+{
+	fprintf(stderr, "Error! Ha !");
+}
