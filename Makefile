@@ -24,3 +24,5 @@ help:
 	-@echo "clean:  delete .o and .d files"
 	-@echo "fclean: execute make clean and delete binaries"
 	-@echo "ctags:  generates vim tags"
+
+.PHONY: all clean fclean ctags help
