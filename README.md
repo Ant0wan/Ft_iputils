@@ -1,4 +1,4 @@
-# Ft_iputils
+# Ft\_iputils
 A set of small useful utilities for Linux networking.
 
 
@@ -13,6 +13,13 @@ Verify:
 - Round trip time of a packet (RTT)
 - Packet loss %
 
-Source: [https://learning.oreilly.com/videos/tcp-ip-fundamentals/9780135450161/9780135450161-TCPI_04_08_01/](https://learning.oreilly.com/videos/tcp-ip-fundamentals/9780135450161/9780135450161-TCPI_04_08_01/)
-
+#### Sources
 [inetutils-2.0.tar.xz](https://ftpmirror.gnu.org/inetutils/inetutils-2.0.tar.xz)
+
+
+#### Ideas
+- [ ] RPM and Deb pkg in release Githug
+- [ ] C CI
+- [ ] Kernel C code style
+- [ ] Autotools and its use memo
+- [ ] All ping options
