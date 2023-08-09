@@ -1,72 +1,93 @@
-#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <stdint.h>
+#include <getopt.h>
+#include <string.h>
 
-#include "iputils_common.h"
+// Define enum for each option
+enum Option {
+    OPT_HELP = 0,     // -h
+    OPT_COUNT,        // -c
+    OPT_INTERVAL,     // -i
+    OPT_TIMEOUT,      // -t
+    OPT_VERBOSE,      // -v
+    OPT_NUMERIC,      // -n
+    OPT_TTL,          // --ttl
+    OPT_TIMESTAMP,    // --timestamp
+    NUM_OPTIONS       // Number of options
+};
 
-#define t (1u << 8)
-#define v (1u << 9)
-#define w (1u << 9)
-#define f (1u << 2)
-#define l (1u << 3)
-#define n (1u << 4)
-#define p (1u << 5)
-#define r (1u << 6)
-#define s (1u << 7)
+// Define a bit flag for each option
+#define FLAG_OPTION(opt) (1ULL << (opt))
 
-#define T (1u << 0)
-#define W (1u << 1)
+// Define a struct to store the options
+typedef struct {
+    uint64_t flags;   // Bit flags for each option
+    int count;        // -c option value
+    int interval;     // -i option value
+    int timeout;      // -t option value
+    int ttl;          // --ttl option value
+} Options;
 
+int main(int argc, char *argv[]) {
+    // Initialize options with no flags
+    Options options = {0, 0, 0, 0, 0};
 
+    int opt;
+    while ((opt = getopt(argc, argv, "hc:i:t:vnn")) != -1) {
+        switch (opt) {
+            case 'h':
+                options.flags |= FLAG_OPTION(OPT_HELP);
+                break;
+            case 'c':
+                options.flags |= FLAG_OPTION(OPT_COUNT);
+                options.count = atoi(optarg);
+                break;
+            case 'i':
+                options.flags |= FLAG_OPTION(OPT_INTERVAL);
+                options.interval = atoi(optarg);
+                break;
+            case 't':
+                options.flags |= FLAG_OPTION(OPT_TIMEOUT);
+                options.timeout = atoi(optarg);
+                break;
+            case 'v':
+                options.flags |= FLAG_OPTION(OPT_VERBOSE);
+                break;
+            case 'n':
+                options.flags |= FLAG_OPTION(OPT_NUMERIC);
+                break;
+            case 0:
+                if (strcmp(optarg, "ttl") == 0) {
+                    options.flags |= FLAG_OPTION(OPT_TTL);
+                    options.ttl = atoi(argv[optind]);
+                } else if (strcmp(optarg, "timestamp") == 0) {
+                    options.flags |= FLAG_OPTION(OPT_TIMESTAMP);
+                }
+                break;
+            default:
+                fprintf(stderr, "Usage: %s [options] destination\n", argv[0]);
+                return 1;
+        }
+    }
 
-//    Set a single bit: test |= a
-//    Clear a single bit: test &= ~a.
-//    Check if bit set test & a.
-//  -f -l -n -w -W -p -r -s -T --ttl --ip-timestamp flags
+    // Check and display options
+    if (options.flags & FLAG_OPTION(OPT_HELP)) {
+        printf("Display help message.\n");
+    }
 
-int main(int argc, char **argv)
-{
-	int flags, opt;
-	int nsecs, tfnd;
-//	atexit(print);
-//	setlocale(LC_ALL, "");
+    if (options.flags & FLAG_OPTION(OPT_COUNT)) {
+        printf("Ping count: %d\n", options.count);
+    }
 
-	nsecs = 0;
-	tfnd = 0;
-	flags = 0;
-	while ((opt = getopt(argc, argv, "ntv:?")) != -1) {
-		switch (opt) {
-		case '?':
-			flags = 1;
-			break;
-		case 'n':
-			flags = 1;
-			break;
-		case 't':
-			nsecs = atoi(optarg); // segfault
-			tfnd = 1;
-			break;
-		case 'v':
-			break;
-		default: /* '?' */
-			fprintf(stderr, "Usage: %s [-t nsecs] [-n] name\n",
-				argv[0]);
-			exit(EXIT_FAILURE);
-		}
-	}
+    if (options.flags & FLAG_OPTION(OPT_TTL)) {
+        printf("TTL: %d\n", options.ttl);
+    }
 
-	printf("flags=%d; tfnd=%d; nsecs=%d; optind=%d\n", flags, tfnd, nsecs,
-	       optind);
+    // ... Repeat for other options ...
 
-	if (optind >= argc) {
-		fprintf(stderr, "Expected argument after options\n");
-		exit(EXIT_FAILURE);
-	}
+    // Process non-option arguments (destination)
 
-	printf("name argument = %s\n", argv[optind]);
-
-	/* Other code omitted */
-
-	exit(EXIT_SUCCESS);
+    return 0;
 }
+
