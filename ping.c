@@ -5,13 +5,6 @@
 
 #include "iputils_common.h"
 
-// int main(int argc, char **argv)
-//{
-//	atexit(print);
-//	setlocale(LC_ALL, "");
-//	return 0;
-// }
-
 #define t (1u << 8)
 #define v (1u << 9)
 #define w (1u << 9)
@@ -36,6 +29,8 @@ int main(int argc, char **argv)
 {
 	int flags, opt;
 	int nsecs, tfnd;
+//	atexit(print);
+//	setlocale(LC_ALL, "");
 
 	nsecs = 0;
 	tfnd = 0;
